@@ -12,8 +12,7 @@ def main():
 def predict():
     # try:
     imagefile = request.files['imagefile']
-    img_path = "static/" + imagefile.filename
-    imagefile.save(img_path)
+    imagefile.save(os.path.join(app.root_path, 'static', imagefile.filename))
     
     if (request.form.get('detection')):
         cropped_img = detection(request.form.get('detection'), img_path)
