@@ -21,6 +21,3 @@ def predict():
         return render_template('index.html', detection = request.form.get('detection'), recognition = request.form.get('recognition'), prediction = prediction)
     # except:
     #     return render_template('index.html', prediction = 'Error occurred')
-
-if __name__ == '__main__':
-    app.run(port = 8080, debug = True)
