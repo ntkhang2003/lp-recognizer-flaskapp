@@ -12,7 +12,7 @@ def main():
 def predict():
     # try:
     imagefile = request.files['imagefile']
-    img_path = "./static/" + imagefile.filename
+    img_path = "static/" + imagefile.filename
     imagefile.save(img_path)
     
     if (request.form.get('detection')):
