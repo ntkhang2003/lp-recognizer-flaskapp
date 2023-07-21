@@ -51,7 +51,7 @@
         {% if prediction and prediction != 'Error occurred' %}
             <h2 class="text-center">Result from {{detection}} + {{recognition}}: {{prediction}}</h2>
             <div id="img-box">
-                <img src="{{ url_for('static', filename='input.jpg') }}" width="500" alt="image-prediction">
+                <img src="data:image/png;base64,{{ image_data | safe}}" width="500" alt="image-prediction">
             </div>
         {% elif prediction == 'Error occurred' or prediction == '' %}
             <h2 class="text-center">Sorry, I can't read the plate</h2>

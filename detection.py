@@ -9,13 +9,12 @@ wpod_net = load_model(wpod_net_path)
 # Kích thước lớn nhất và nhỏ nhất của 1 chiều ảnh
 Dmax = 608
 Dmin = 288
-def detection(model_name, img_path):
+def detection(model_name, image):
     if not model_name:
         return None
     elif model_name == 'YOLOv8':
         model = YOLO('model/YOLOv8/best.pt')
-        img = cv2.imread(img_path)
-        cv2.imwrite('static/input.jpg', img)
+        img = image
         res = model(img)
         res_plotted = res[0].plot()
         t = res[0].boxes.xyxy
@@ -28,8 +27,7 @@ def detection(model_name, img_path):
         cropped_img = cv2.resize(cropped_img, (470, 110))
         return cropped_img
     elif model_name == 'WPOD-NET':
-        img = cv2.imread(img_path)
-        cv2.imwrite('static/input.jpg', img)
+        img = image
         ratio = float(max(img.shape[:2])) / min(img.shape[:2])
         side = int(ratio * Dmin)
         bound_dim = min(side, Dmax)
