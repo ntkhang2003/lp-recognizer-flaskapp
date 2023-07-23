@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from detection import detection
-from recognition import recognition
+from app.detection import detection
+from app.recognition import recognition
 from io import BytesIO
 import numpy as np
 import cv2

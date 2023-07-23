@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS231 - License Plate Recognition</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .form-container .form-control {
+            margin-bottom: 10px;
+        }
+        .form-container .btn-primary {
+            width: 100%;
+        }
+        .result-container {
+            max-width: 500px;
+            margin: 40px auto;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .result-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .result-container img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><a href="/">License Plate Recognition</a></h1>
+    </div>
+    <div class="form-container">
+        <h1 class="text-center">Upload Image</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="imagefile">
+            <div class="form-group">
+                <label for="detection">Detection Model:</label>
+                <select class="form-control" name="detection">
+                    <option value="WPOD-NET" selected>WPOD-NET</option>
+                    <option value="YOLOv8">YOLOv8</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="recognition">Recognition Model:</label>
+                <select class="form-control" name="recognition">
+                    <option value="OCR" selected>OCR</option>
+                    <option value="kNN">kNN</option>
+                    <option value="SVM">SVM</option>
+                </select>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Read Plate">
+        </form>
+    </div>
+
+    {% if prediction and prediction != 'Error occurred' %}
+    <div class="result-container">
+        <h2>Result from {{detection}} + {{recognition}}: {{prediction}}</h2>
+        <img src="data:image/png;base64,{{ image_data | safe}}" alt="image-prediction">
+    </div>
+    {% elif prediction == 'Error occurred' or prediction == '' %}
+    <div class="result-container">
+        <h2>Sorry, I can't read the plate</h2>
+    </div>
+    {% endif %}
+</body>
+</html>
