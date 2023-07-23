@@ -5,6 +5,8 @@ This is a website using Flask to provide an interface for License Plate Recognit
 ### Using docker-compose
 Run the following commands
 ```
+python -m venv .venv
+.venv\scripts\activate
 docker-compose build
 docker-compose up
 ```
@@ -15,6 +17,8 @@ docker-compose up --build
 ### Another way to install in case of errors when building image
 Run the following commands
 ```
+python -m venv .venv
+.venv\scripts\activate
 cd flask
 pip install -r requirements.txt
 python run.py
